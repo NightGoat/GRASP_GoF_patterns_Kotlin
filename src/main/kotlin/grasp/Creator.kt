@@ -1,9 +1,7 @@
-package GRASP
+package grasp
 
 import utils.FakeRepo
-import utils.models.Order
 import utils.models.OrderItem
-import utils.models.Product
 
 /**
  * WIKI:

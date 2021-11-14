@@ -1,4 +1,4 @@
-package GRASP
+package grasp
 
 import utils.FakeRepo
 

@@ -1,4 +1,4 @@
-package utils.models
+package utils
 
 import sun.awt.Mutex
 

@@ -1,4 +1,4 @@
-package GRASP
+package grasp
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import sun.awt.Mutex
 import utils.models.Calculator
 import utils.models.ClickType
-import utils.models.withLock
+import utils.withLock
 import java.awt.Button
 import java.awt.TextField
 import kotlin.coroutines.CoroutineContext
@@ -91,7 +91,7 @@ class GoodApplication(): Application() {
         minusButton.onUserAction {
             val x = firstNumberField.text
             val y = secondNumberField.text
-            finalNumberField.text = uiController.newInput(x, y).onUserClick(ClickType.PLUS)
+            finalNumberField.text = uiController.newInput(x, y).onUserClick(ClickType.MINUS)
         }
     }
 }
@@ -136,7 +136,7 @@ class AnotherGoodApplication: Application() {
         minusButton.onUserAction {
             val x = firstNumberField.text
             val y = secondNumberField.text
-            finalNumberField.text = UiController().newInput(x, y).onUserClick(ClickType.PLUS)
+            finalNumberField.text = UiController().newInput(x, y).onUserClick(ClickType.MINUS)
         }
     }
 }
