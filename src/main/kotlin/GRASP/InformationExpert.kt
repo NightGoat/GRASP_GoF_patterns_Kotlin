@@ -3,6 +3,7 @@ package GRASP
 import utils.FakeRepo
 
 /**
+ * WIKI:
  * Information expert
  * See also: Information hiding
  *

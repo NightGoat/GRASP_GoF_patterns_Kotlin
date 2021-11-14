@@ -6,6 +6,7 @@ import utils.models.OrderItem
 import utils.models.Product
 
 /**
+ * WIKI:
  * Creator
  * See also: Factory pattern
 
