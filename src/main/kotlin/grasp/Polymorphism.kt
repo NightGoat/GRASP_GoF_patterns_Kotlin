@@ -19,13 +19,7 @@ import utils.models.SystemVersion
  * Example of not using polymorphism: you wrote an api, time passes by and you update it, it gets v2, v3, v4...
  * And if you will handle it in every if else construction it will be big and unbearable.
  * */
-class BadApi {
-    private var apiVersion = SystemVersion.V_1
-
-    fun setApiVersion(newApiVersion: SystemVersion): BadApi {
-        apiVersion = newApiVersion
-        return this
-    }
+class BadApi private constructor(private val apiVersion: SystemVersion){
 
     fun updateData() {
         when(apiVersion) {
@@ -42,13 +36,19 @@ class BadApi {
             SystemVersion.V_3 -> println("send v_3")
         }
     }
+
+    companion object {
+        fun build(systemVersion: SystemVersion): BadApi {
+            return BadApi(systemVersion)
+        }
+    }
 }
 
 class System1 {
-    var api = BadApi()
+    var systemVersion = SystemVersion.V_2
+    private var api = BadApi.build(systemVersion)
 
     fun main() {
-        api.setApiVersion(SystemVersion.V_2)
         api.updateData()
         api.sendData()
     }
@@ -59,30 +59,40 @@ class System1 {
  * implement its behaviour for every api version
  * */
 interface GoodApi {
+    val systemVersion: SystemVersion
     fun updateData()
     fun sendData()
 }
 
 class ApiV1: GoodApi {
+    override val systemVersion: SystemVersion = SystemVersion.V_1
     override fun updateData() = println("updated v_1")
     override fun sendData() = println("send v_1")
 }
 
 class ApiV2: GoodApi {
+    override val systemVersion: SystemVersion = SystemVersion.V_2
     override fun updateData() =  println("updated v_2")
     override fun sendData() = println("send v_2")
 }
 
 class ApiV3: GoodApi {
+    override val systemVersion: SystemVersion = SystemVersion.V_3
     override fun updateData() = println("updated v_3")
     override fun sendData() = println("send v_3")
 }
 
 class System2 {
-    var api: GoodApi = ApiV1()
+    var systemVersion = SystemVersion.V_2
+
+    private val api: GoodApi
+        get() = when(systemVersion) {
+            SystemVersion.V_1 -> ApiV1()
+            SystemVersion.V_2 -> ApiV2()
+            SystemVersion.V_3 -> ApiV3()
+        }
 
     fun main() {
-        api = ApiV2()
         api.updateData()
         api.sendData()
     }
