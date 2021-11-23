@@ -56,12 +56,22 @@ class System1 {
 
 /**
  * Good way to handle this situation is to have interface or abstract class for an api, and classes that would
- * implement its behaviour for every api version
+ * implement its behaviour for every api version. Classes stay small and easy to read.
  * */
 interface GoodApi {
     val systemVersion: SystemVersion
     fun updateData()
     fun sendData()
+
+    companion object {
+        fun createApi(systemVersion: SystemVersion): GoodApi {
+            return when(systemVersion) {
+                SystemVersion.V_1 -> ApiV1()
+                SystemVersion.V_2 -> ApiV2()
+                SystemVersion.V_3 -> ApiV3()
+            }
+        }
+    }
 }
 
 class ApiV1: GoodApi {
@@ -84,13 +94,7 @@ class ApiV3: GoodApi {
 
 class System2 {
     var systemVersion = SystemVersion.V_2
-
-    private val api: GoodApi
-        get() = when(systemVersion) {
-            SystemVersion.V_1 -> ApiV1()
-            SystemVersion.V_2 -> ApiV2()
-            SystemVersion.V_3 -> ApiV3()
-        }
+    private val api = GoodApi.createApi(systemVersion)
 
     fun main() {
         api.updateData()
