@@ -6,6 +6,7 @@ import utils.models.WeatherSensor
 import java.util.*
 
 /**
+ * WIKI:
  * High cohesion is an evaluative pattern that attempts to keep objects appropriately focused, manageable and
  * understandable. High cohesion is generally used in support of low coupling. High cohesion means that the
  * responsibilities of a given element are strongly related and highly focused. Breaking programs into classes
