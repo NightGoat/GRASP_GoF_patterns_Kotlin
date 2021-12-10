@@ -3,10 +3,10 @@ package grasp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import sun.awt.Mutex
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import utils.models.Calculator
 import utils.models.ClickType
-import utils.withLock
 import java.awt.Button
 import java.awt.TextField
 import kotlin.coroutines.CoroutineContext
